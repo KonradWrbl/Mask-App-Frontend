@@ -66,7 +66,7 @@ let OrderForm = props => {
             <Field name='PETFoil' type='number' component={RenderField} label='Folie PET (w m2)' />
             <StyledSpan>Jednostka zgłaszająca</StyledSpan>
             <Field name='unitName' type='text' component={RenderField} label='Nazwa jednostki' />
-            <Field name='unitAdress' type='number' component={RenderField} label='Wydrukowane ramki do przyłbic' />
+            <Field name='unitAdress' type='text' component={RenderField} label='Adres jednostki' />
             <StyledSpan>Kontakt do osoby odbierającej zamówenie w jednostce</StyledSpan>
             <Field name='contactName' type='text' component={RenderField} label='Imię' />
             <Field name='contactSurname' type='text' component={RenderField} label='Nazwisko' />
