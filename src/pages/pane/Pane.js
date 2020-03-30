@@ -8,14 +8,44 @@ import Axios from 'axios';
 const Pane = () => {
 
     const [orders, setOrders] = useState([])
+    const [isAdmin, setAdmin] = useState(false)
 
     const onLoad = () => {
-        Axios.get('/orders')
+
+        const token = localStorage.getItem('FBIdToken')
+        const config = {
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            }
+        }
+
+        const getAllData = () => {
+            Axios.get('/orders')
             .then((res) => {
                 setOrders(res.data)
                 console.log(res.data);
             })
             .catch(err => console.log(err))
+        }
+
+        const getUserData = () => {
+            Axios.get('/userorders', config)
+            .then((res) => {
+                setOrders(res.data)
+                console.log(res.data);
+            })
+            .catch(err => console.log(err))
+        }
+
+        Axios.get('/type', config)
+            .then(res => {
+                console.log(res.data);
+                setAdmin(res.data);
+                if(res.data) {
+                    getAllData()
+                } else {getUserData()}
+            })
     }
 
     useEffect(() => {
@@ -48,22 +78,29 @@ const Pane = () => {
                             <StyledTh>Przyłbice</StyledTh>
                             <StyledTh>Ramki do przyłbic</StyledTh>
                             <StyledTh>formatki PET</StyledTh>
-                            <StyledTh>FIlament PET</StyledTh>
+                            <StyledTh>Filament PET</StyledTh>
                             <StyledTh>Folie PET</StyledTh>
                             <StyledTh>Data</StyledTh>
                         </StyledTr>
                     </StyledThead>
                     <StyledTbody>
                         {ordersList}
-
                     </StyledTbody>
                 </StyledTable>
             </TableContainer>
-            <Link to='/order'>
-                <FullButton>
-                    Złóż zamówienie
-                </FullButton>
-            </Link>
+            <div>
+                <Link to='/order'>
+                    <FullButton>
+                        Złóż zamówienie
+                    </FullButton>
+                </Link>
+                <Link to='/register'>
+                    <FullButton>
+                        Zarejestruj użytkownika
+                    </FullButton>
+                </Link>
+            </div>
+
         </PaneContainer>
     )
 }

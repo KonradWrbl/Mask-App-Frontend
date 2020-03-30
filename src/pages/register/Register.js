@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RegisterForm from '../../forms/registerForm/RegisterForm';
 import { RegisterContainer, RegisterWrapper, Title, LoadingWrapper, Loader, WrongCredentials } from './style';
 import { useState } from 'react';
@@ -9,10 +9,33 @@ const Login = props => {
     const [ error, setError ] = useState('')
     const[ isLoading, setLoading ] = useState(false)
 
+    useEffect(() => {
+        setLoading(true)
+        const token = localStorage.getItem('FBIdToken')
+        const config = {
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            }
+        }
+
+        Axios.get('/type', config)
+            .then(res => {
+                if(!res.data) {
+                    window.location.href = '/'
+                }
+                setLoading(false)
+            })
+            .catch(err => {
+                window.location.href = '/'
+                console.log(err);
+                setLoading(false)
+            })
+    }, [])
+
     const submit = values => {
         console.log(values);
         setLoading(true);
-
         Axios.post('/signup', {
             name: values.name,
             surname: values.surname,

@@ -32,7 +32,7 @@ function App() {
         <Switch>
           <Route exact path='/' ><Base authenticated={authenticated}/></Route>
           <AuthRouter path='/login' component={Login} authenticated={authenticated}/>
-          <AuthRouter path='/register' component={Register} authenticated={authenticated}/>
+          <Route path='/register' component={Register} />
           <AuthRouter path='/pane' component={Pane} authenticated={!authenticated}/>
           <AuthRouter path='/order' component={Order} authenticated={!authenticated}/>
         </Switch>
