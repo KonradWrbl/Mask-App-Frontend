@@ -20,6 +20,9 @@ const validate = values => {
     }
     if (!values.pass) {
         errors.pass = 'Uzupełnij wymagane pole!';
+        console.log(typeof(values.pass));
+    } else if(values.pass.length < 6) {
+        errors.pass = 'Hasło musi zawierać min 6 znaków';
     } else if (values.pass !== values.passApprove) {
         errors.passApprove = 'Hasła nie są identyczne'
     }
