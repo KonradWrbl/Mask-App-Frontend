@@ -9,6 +9,7 @@ const Nav = ({ authenticated }) => {
     const logOut = () =>{
         localStorage.removeItem('FBIdToken');
         delete axios.defaults.headers.common['Authorization']
+        window.location.href = '/'
         window.location.reload()
     }
     return(
