@@ -13,6 +13,7 @@ const Pane = () => {
         Axios.get('/orders')
             .then((res) => {
                 setOrders(res.data)
+                console.log(res.data);
             })
             .catch(err => console.log(err))
     }
@@ -23,14 +24,14 @@ const Pane = () => {
 
     const ordersList = orders.map((el, key) =>
         <StyledTr key={el.orderId}>
-            <StyledTd>Jan</StyledTd>
-            <StyledTd>Kowalski</StyledTd>
+            <StyledTd>{el.name}</StyledTd>
+            <StyledTd>{el.surname}</StyledTd>
             <StyledTd>{el.visors}</StyledTd>
             <StyledTd>{el.frames}</StyledTd>
             <StyledTd>{el.forms}</StyledTd>
             <StyledTd>{el.PETFilament}</StyledTd>
             <StyledTd>{el.PETFoil}</StyledTd>
-            <StyledTd>34:34:32</StyledTd>
+            <StyledTd>{el.createdAt}</StyledTd>
         </StyledTr>
     )
 

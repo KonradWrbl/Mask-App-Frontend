@@ -37,6 +37,15 @@ const validate = values => {
     if (!values.contactSurname) {
         errors.contactSurname = 'Uzupełnij wymagane pole!';
     }
+    if (!values.phone) {
+        errors.phone = 'Uzupełnij wymagane pole!';
+    }
+    if (!values.name) {
+        errors.name = 'Uzupełnij wymagane pole!';
+    }
+    if (!values.surname) {
+        errors.surname = 'Uzupełnij wymagane pole!';
+    }
     return errors;
 }
 
@@ -59,7 +68,7 @@ let OrderForm = props => {
             <Field name='unitName' type='text' component={RenderField} label='Nazwa jednostki' />
             <Field name='unitAdress' type='number' component={RenderField} label='Wydrukowane ramki do przyłbic' />
             <StyledSpan>Kontakt do osoby odbierającej zamówenie w jednostce</StyledSpan>
-            <Field name='contactName' type='number' component={RenderField} label='Imię' />
+            <Field name='contactName' type='text' component={RenderField} label='Imię' />
             <Field name='contactSurname' type='text' component={RenderField} label='Nazwisko' />
             <Field name='contactPhone' type='text' component={RenderField} label='Numer telefonu' />
             <ButtonContainer>

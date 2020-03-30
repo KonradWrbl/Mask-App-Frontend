@@ -15,12 +15,13 @@ const Order = props => {
 
 
     const submit = values => {
-        console.log(values);
         setLoading(true);
         const token = localStorage.getItem('FBIdToken')
-        console.log(token);
 
         const orderData = {
+            name: values.name,
+            surname: values.surname,
+            phone: values.phone,
             visors: values.visors,
             frames: values.frames,
             forms: values.forms,
@@ -44,8 +45,8 @@ const Order = props => {
 
         axios.post('/order', orderData, config)
         .then(res => {
-            console.log(res);
             setLoading(false);
+            console.log(res.data);
             props.history.push('/pane');
             // window.location.reload()
         })

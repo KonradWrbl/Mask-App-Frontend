@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 export const StyledForm = styled.form`
     width: 100%;
+
+    input {
+        width: 100%;
+    }
 `
 
 export const ButtonContainer = styled.div`
