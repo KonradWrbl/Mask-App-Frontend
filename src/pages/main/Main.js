@@ -31,7 +31,7 @@ const Main = ({ authenticated }) => {
                 </ButtonContainer> :
                 <Link to='/login'>
                     <FullButton>
-                        Zaloguj się / Zarejestruj się
+                        Zaloguj się do panelu
                     </FullButton>
                 </Link>
             }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import LoginForm from '../../forms/loginForm/LoginForm';
-import { LoginContainer, LoginWrapper, Title, RegisterWrapper, Text, LoadingWrapper, Loader, WrongCredentials } from './style';
-import { FullButton } from '../../components/FullButton';
-import { Link } from 'react-router-dom';
+import { LoginContainer, LoginWrapper, Title, LoadingWrapper, Loader, WrongCredentials } from './style';
+
 import axios from 'axios';
 
 const Login = props => {
@@ -46,14 +45,6 @@ const Login = props => {
                 </Title>
                 {error !== '' && <WrongCredentials>{error.general}</WrongCredentials>}
                 <LoginForm onSubmit={submit} />
-                <RegisterWrapper>
-                    <Text>
-                        Nie posiadasz konta?
-                    </Text>
-                    <Link to='/register'>
-                        <FullButton>Zarejestruj się</FullButton>
-                    </Link>
-                </RegisterWrapper>
             </LoginWrapper>
         </LoginContainer>
 

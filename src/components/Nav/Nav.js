@@ -38,7 +38,7 @@ const Nav = ({ authenticated }) => {
                 </> :
                 <Link to='/login'>
                     <FullButton>
-                        Zaloguj się / Zarejestruj się
+                        Zaloguj się
                     </FullButton>
                 </Link>
             }
