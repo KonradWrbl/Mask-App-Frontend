@@ -50,3 +50,7 @@ export const MedicImg = styled(Medic)`
     }
 `
 
+export const ButtonContainer = styled.div`
+
+`
+

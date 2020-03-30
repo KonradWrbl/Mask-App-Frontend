@@ -2,10 +2,10 @@ import React from 'react';
 import Main from '../main/Main';
 import About from '../about/About';
 
-const Base =() => {
+const Base =({ authenticated }) => {
     return (
         <>
-            <Main />
+            <Main authenticated={ authenticated }/>
             <About />
         </>
     )

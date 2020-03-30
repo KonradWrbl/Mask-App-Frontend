@@ -30,7 +30,7 @@ function App() {
       <Router>
         <Nav authenticated={authenticated}/>
         <Switch>
-          <Route exact path='/' component={Base} />
+          <Route exact path='/' ><Base authenticated={authenticated}/></Route>
           <AuthRouter path='/login' component={Login} authenticated={authenticated}/>
           <AuthRouter path='/register' component={Register} authenticated={authenticated}/>
           <AuthRouter path='/pane' component={Pane} authenticated={!authenticated}/>
