@@ -94,11 +94,13 @@ const Pane = () => {
                         Złóż zamówienie
                     </FullButton>
                 </Link>
-                <Link to='/register'>
-                    <FullButton>
-                        Zarejestruj użytkownika
-                    </FullButton>
-                </Link>
+                {isAdmin &&
+                    <Link to='/register'>
+                        <FullButton>
+                            Zarejestruj użytkownika
+                        </FullButton>
+                    </Link>
+                }
             </div>
 
         </PaneContainer>
