@@ -89,7 +89,6 @@ export const DetailsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 60px 0 10px 0;
 `
 
 export const DetailsWrapper = styled.div`
