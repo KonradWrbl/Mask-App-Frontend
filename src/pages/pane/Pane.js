@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FullButton } from '../../components/FullButton'
 import { Link } from 'react-router-dom';
-import { PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer } from './style';
+import { PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader } from './style';
+import { ButtonContainer } from '../../forms/orderForm/style';
 import Axios from 'axios';
 
 
@@ -9,8 +10,12 @@ const Pane = () => {
 
     const [orders, setOrders] = useState([])
     const [isAdmin, setAdmin] = useState(false)
+    const [details, setDetails] = useState({})
+    const [showDetails, setShowDetails] = useState(false)
+    const[ isLoading, setLoading ] = useState(false)
 
     const onLoad = () => {
+        setLoading(true)
 
         const token = localStorage.getItem('FBIdToken')
         const config = {
@@ -44,7 +49,11 @@ const Pane = () => {
                 setAdmin(res.data);
                 if(res.data) {
                     getAllData()
-                } else {getUserData()}
+                    setLoading(false)
+                } else {
+                    getUserData()
+                    setLoading(false)
+                }
             })
     }
 
@@ -52,22 +61,113 @@ const Pane = () => {
         onLoad();
     }, [])
 
-    const ordersList = orders.map((el, key) =>
-        <StyledTr key={el.orderId}>
-            <StyledTd>{el.name}</StyledTd>
-            <StyledTd>{el.surname}</StyledTd>
-            <StyledTd>{el.visors}</StyledTd>
-            <StyledTd>{el.frames}</StyledTd>
-            <StyledTd>{el.forms}</StyledTd>
-            <StyledTd>{el.PETFilament}</StyledTd>
-            <StyledTd>{el.PETFoil}</StyledTd>
-            <StyledTd>{el.createdAt}</StyledTd>
-        </StyledTr>
+    const toggleDetails = (e, id) => {
+        e.stopPropagation()
+        console.log(id);
+        for(let i = 0; i < orders.length; i++) {
+            if(orders[i].orderId === id) {
+                setDetails(orders[i]);
+                setShowDetails(true)
+            }
+        }
+    }
+
+    const ordersList = orders.map((el, key) =>{
+        const id = el.orderId;
+        return(
+            <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
+                <StyledTd>{el.name}</StyledTd>
+                <StyledTd>{el.surname}</StyledTd>
+                <StyledTd>{el.visors}</StyledTd>
+                <StyledTd>{el.frames}</StyledTd>
+                <StyledTd>{el.forms}</StyledTd>
+                <StyledTd>{el.PETFilament}</StyledTd>
+                <StyledTd>{el.PETFoil}</StyledTd>
+                <StyledTd>{el.createdAt}</StyledTd>
+            </StyledTr>
+        )}
+    )
+
+    const ordersDetailsList = (
+        <>
+            <StyledTr>
+                <StyledTd>Identyfikator zamówienia</StyledTd>
+                <StyledTd>{details.orderId}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Data złożenia zamówienia</StyledTd>
+                <StyledTd>{details.createdAt}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Imię i Nazwisko</StyledTd>
+                <StyledTd>{`${details.name} ${details.surname}`}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Numer telefonu</StyledTd>
+                <StyledTd>{details.phone}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Ilość przyłbic</StyledTd>
+                <StyledTd>{details.visors}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Ilość wydrukowanych ramek do przyłbic</StyledTd>
+                <StyledTd>{details.frames}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Ilość wyciętych formatek PET</StyledTd>
+                <StyledTd>{details.forms}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Filament PET (w kg)</StyledTd>
+                <StyledTd>{details.PETFilament}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Folie PET (w m2)</StyledTd>
+                <StyledTd>{details.PETFoil}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Nazwa jadnostki</StyledTd>
+                <StyledTd>{details.unit}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Adres jednostki</StyledTd>
+                <StyledTd>{details.unitAdress}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Imię i nazwisko osoby odbierającej zamówienie</StyledTd>
+                <StyledTd>{`${details.contactName} ${details.contactSurname}`}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>Telefon do osoby odbierającej zamówienie</StyledTd>
+                <StyledTd>{details.contactPhone}</StyledTd>
+            </StyledTr>
+
+        </>
     )
 
 
     return (
         <PaneContainer>
+            {isLoading &&
+                <LoadingWrapper>
+                    <Loader>
+                        <div></div>
+                        <div></div>
+                    </Loader>
+                </LoadingWrapper>
+            }
+            {showDetails &&
+                <DetailsContainer onClick={()=>setShowDetails(false)}>
+                    <DetailsWrapper>
+                        <DetailsTitle>Szczegóły</DetailsTitle>
+                        <StyledTable>
+                            <StyledTbody>
+                                {ordersDetailsList}
+                            </StyledTbody>
+                        </StyledTable>
+                    </DetailsWrapper>
+                </DetailsContainer>}
             <TableContainer>
                 <StyledTable>
                     <StyledCaption>Zamówienia</StyledCaption>
@@ -88,7 +188,7 @@ const Pane = () => {
                     </StyledTbody>
                 </StyledTable>
             </TableContainer>
-            <div>
+            <ButtonContainer>
                 <Link to='/order'>
                     <FullButton>
                         Złóż zamówienie
@@ -101,7 +201,7 @@ const Pane = () => {
                         </FullButton>
                     </Link>
                 }
-            </div>
+            </ButtonContainer>
 
         </PaneContainer>
     )

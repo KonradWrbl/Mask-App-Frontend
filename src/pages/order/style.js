@@ -29,6 +29,7 @@ export const LoginWrapper = styled.div`
     margin: 100px 0;
 
     @media (max-width: 768px) {
+
         padding-top: 80px;
         width: 100vw;
         justify-content: center;
@@ -47,6 +48,7 @@ export const RegisterWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 `
 
 export const Text = styled.div`

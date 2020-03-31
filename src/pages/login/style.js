@@ -26,6 +26,7 @@ export const LoginWrapper = styled.div`
     padding: 30px;
 
     @media (max-width: 768px) {
+        height: 100vh;
         padding-top: 80px;
         width: 100vw;
         justify-content: center;
