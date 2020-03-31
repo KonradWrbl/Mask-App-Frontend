@@ -12,7 +12,8 @@ const Pane = () => {
     const [isAdmin, setAdmin] = useState(false)
     const [details, setDetails] = useState({})
     const [showDetails, setShowDetails] = useState(false)
-    const[ isLoading, setLoading ] = useState(false)
+    const [isLoading, setLoading ] = useState(false)
+    const [activePostID, setActivePostID ] = useState('')
 
     const onLoad = () => {
         setLoading(true)
@@ -63,18 +64,57 @@ const Pane = () => {
 
     const toggleDetails = (e, id) => {
         e.stopPropagation()
-        console.log(id);
         for(let i = 0; i < orders.length; i++) {
             if(orders[i].orderId === id) {
                 setDetails(orders[i]);
                 setShowDetails(true)
+                setActivePostID(id)
             }
         }
     }
 
-    const ordersList = orders.map((el, key) =>{
+    const setStatus = () => {
+        console.log(activePostID);
+
+        const token = localStorage.getItem('FBIdToken')
+        const config = {
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            }
+        }
+        const data = {
+            id: activePostID
+        }
+
+        Axios.post('/setstatus', data, config,)
+            .then(res => {
+                console.log(res.data);
+                onLoad();
+            })
+    }
+
+    const doneOrdersList = orders.map((el, key) =>{
         const id = el.orderId;
-        return(
+        const done = el.done;
+        if (done) return(
+            <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
+                <StyledTd>{el.name}</StyledTd>
+                <StyledTd>{el.surname}</StyledTd>
+                <StyledTd>{el.visors}</StyledTd>
+                <StyledTd>{el.frames}</StyledTd>
+                <StyledTd>{el.forms}</StyledTd>
+                <StyledTd>{el.PETFilament}</StyledTd>
+                <StyledTd>{el.PETFoil}</StyledTd>
+                <StyledTd>{el.createdAt}</StyledTd>
+            </StyledTr>
+        )}
+    )
+
+    const undoneOrdersList = orders.map((el, key) =>{
+        const id = el.orderId;
+        const done = el.done;
+        if (!done) return(
             <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
                 <StyledTd>{el.name}</StyledTd>
                 <StyledTd>{el.surname}</StyledTd>
@@ -167,10 +207,15 @@ const Pane = () => {
                             </StyledTbody>
                         </StyledTable>
                     </DetailsWrapper>
+                    <ButtonContainer>
+                            <FullButton onClick={setStatus}>
+                                Oznacz jako wykonane
+                            </FullButton>
+                    </ButtonContainer>
                 </DetailsContainer>}
             <TableContainer>
                 <StyledTable>
-                    <StyledCaption>Zamówienia</StyledCaption>
+                    <StyledCaption>Zamówienia oczekujące na realizację</StyledCaption>
                     <StyledThead>
                         <StyledTr>
                             <StyledTh>Imię</StyledTh>
@@ -184,7 +229,7 @@ const Pane = () => {
                         </StyledTr>
                     </StyledThead>
                     <StyledTbody>
-                        {ordersList}
+                        {undoneOrdersList}
                     </StyledTbody>
                 </StyledTable>
             </TableContainer>
@@ -202,6 +247,26 @@ const Pane = () => {
                     </Link>
                 }
             </ButtonContainer>
+            <TableContainer>
+                <StyledTable>
+                    <StyledCaption>Zrealizowane zamówienia</StyledCaption>
+                    <StyledThead>
+                        <StyledTr>
+                            <StyledTh>Imię</StyledTh>
+                            <StyledTh>Nazwisko</StyledTh>
+                            <StyledTh>Przyłbice</StyledTh>
+                            <StyledTh>Ramki do przyłbic</StyledTh>
+                            <StyledTh>formatki PET</StyledTh>
+                            <StyledTh>Filament PET</StyledTh>
+                            <StyledTh>Folie PET</StyledTh>
+                            <StyledTh>Data</StyledTh>
+                        </StyledTr>
+                    </StyledThead>
+                    <StyledTbody>
+                        {doneOrdersList}
+                    </StyledTbody>
+                </StyledTable>
+            </TableContainer>
 
         </PaneContainer>
     )

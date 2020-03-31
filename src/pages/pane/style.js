@@ -33,7 +33,7 @@ export const ButtonContainer = styled.div`
 
 export const StyledTable = styled.table`
     width: 100%;
-    height: 200px;
+    height: auto;
 
     border-collapse: collapse;
     border-spacing: 0;
@@ -87,9 +87,10 @@ export const DetailsContainer = styled.div`
     background-color: rgba(206,206,206,.6);
     position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 120px 0 10px 0
+    padding: 120px 0 10px 0;
 `
 
 export const DetailsWrapper = styled.div`
