@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Router basename={'/'}>
+      <Router>
         <Nav authenticated={authenticated}/>
         <Switch>
           <Route exact path='/' ><Base authenticated={authenticated}/></Route>
