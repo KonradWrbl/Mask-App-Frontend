@@ -26,7 +26,7 @@ export const TableContainer = styled.div`
     width: 100%;
 `
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer2 = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;

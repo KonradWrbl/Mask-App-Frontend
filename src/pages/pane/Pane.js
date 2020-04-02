@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FullButton } from '../../components/FullButton'
 import { Link } from 'react-router-dom';
-import { ButtonContainer, PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader } from './style';
+import { ButtonContainer2, PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader } from './style';
 import Axios from 'axios';
+import { ButtonContainer } from '../../forms/orderForm/style'
 
 function useForceUpdate(){
     const [, setValue] = useState(0); // integer state
@@ -285,14 +286,14 @@ const Pane = () => {
                             </FullButton>
                     </ButtonContainer>
                 </DetailsContainer>}
-                <ButtonContainer>        
+                <ButtonContainer2>        
                     <FullButton onClick={() => sortTab('type')}>
                         Sortuj: typ
                     </FullButton>       
                     <FullButton onClick={() => sortTab('date')}>
                         Sortuj: data
                     </FullButton>
-            </ButtonContainer>   
+            </ButtonContainer2>   
             <TableContainer>
                 <StyledTable>
                     <StyledCaption>Zamówienia oczekujące na realizację</StyledCaption>
@@ -314,7 +315,7 @@ const Pane = () => {
                     </StyledTbody>
                 </StyledTable>
             </TableContainer>
-            <ButtonContainer>
+            <ButtonContainer2>
                 <Link to='/order'>
                     <FullButton>
                         Złóż zamówienie
@@ -327,7 +328,7 @@ const Pane = () => {
                         </FullButton>
                     </Link>
                 }
-            </ButtonContainer>
+            </ButtonContainer2>
             <TableContainer>
                 <StyledTable>
                     <StyledCaption>Zrealizowane zamówienia</StyledCaption>
@@ -335,6 +336,7 @@ const Pane = () => {
                         <StyledTr>
                             <StyledTh>Imię</StyledTh>
                             <StyledTh>Nazwisko</StyledTh>
+                            <StyledTh>Typ</StyledTh>
                             <StyledTh>Przyłbice</StyledTh>
                             <StyledTh>Ramki do przyłbic</StyledTh>
                             <StyledTh>formatki PET</StyledTh>
