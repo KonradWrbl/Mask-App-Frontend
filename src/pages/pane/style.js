@@ -24,11 +24,13 @@ export const TableContainer = styled.div`
     box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
     padding: 10px;
     width: 100%;
-    margin: 0px 0 10px 0;
 `
 
 export const ButtonContainer = styled.div`
-
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
 `
 
 export const StyledTable = styled.table`

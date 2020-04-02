@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FullButton } from '../../components/FullButton'
 import { Link } from 'react-router-dom';
-import { PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader } from './style';
-import { ButtonContainer } from '../../forms/orderForm/style';
+import { ButtonContainer, PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader } from './style';
 import Axios from 'axios';
 
+function useForceUpdate(){
+    const [, setValue] = useState(0); // integer state
+    return () => setValue(value => ++value); // update the state to force render
+}
 
 const Pane = () => {
 
@@ -101,23 +104,31 @@ const Pane = () => {
                 onLoad();
             })
     }
+    
+    
 
     const doneOrdersList = orders.map((el, key) =>{
         const id = el.orderId;
         const done = el.done;
+        console.log('działam')
         if (done) return(
             <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
                 <StyledTd>{el.name}</StyledTd>
                 <StyledTd>{el.surname}</StyledTd>
+                <StyledTd>{el.maskType}</StyledTd>
                 <StyledTd>{el.visors}</StyledTd>
                 <StyledTd>{el.frames}</StyledTd>
                 <StyledTd>{el.forms}</StyledTd>
                 <StyledTd>{el.PETFilament}</StyledTd>
                 <StyledTd>{el.PETFoil}</StyledTd>
-                <StyledTd>{el.createdAt}</StyledTd>
+                <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
             </StyledTr>
-        )}
+        )
+        return []
+    }
     )
+
+
 
     const undoneOrdersList = orders.map((el, key) =>{
         const id = el.orderId;
@@ -126,14 +137,17 @@ const Pane = () => {
             <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
                 <StyledTd>{el.name}</StyledTd>
                 <StyledTd>{el.surname}</StyledTd>
+                <StyledTd>{el.maskType}</StyledTd>
                 <StyledTd>{el.visors}</StyledTd>
                 <StyledTd>{el.frames}</StyledTd>
                 <StyledTd>{el.forms}</StyledTd>
                 <StyledTd>{el.PETFilament}</StyledTd>
                 <StyledTd>{el.PETFoil}</StyledTd>
-                <StyledTd>{el.createdAt}</StyledTd>
+                <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
             </StyledTr>
-        )}
+        )
+        return []
+        }
     )
 
     const ordersDetailsList = (
@@ -199,6 +213,52 @@ const Pane = () => {
     )
 
 
+    const compareType = (a, b) => {
+        const typeA = a.maskType.toUpperCase()
+        const typeB = b.maskType.toUpperCase()
+
+        let comp = 0;
+        if (typeA > typeB) comp = 1;
+        else if(typeA < typeB) comp = -1;
+
+        return comp;
+    }
+
+    const compareDate = (a, b) => {
+        const typeA = a.createdAt.toUpperCase()
+        const typeB = b.createdAt.toUpperCase()
+
+        let comp = 0;
+        if (typeA > typeB) comp = 1;
+        else if(typeA < typeB) comp = -1;
+
+        return comp * -1;
+    }
+
+    const reload = useForceUpdate()
+
+    const sortTab = (kind) => {
+        const tempOrders = orders
+        switch(kind) {
+            case 'type':
+                tempOrders.sort(compareType)
+                break;
+            case 'date':
+                tempOrders.sort(compareDate)
+                break;
+            default:
+                tempOrders.sort(compareDate)
+                break;
+        }
+        
+        setOrders(tempOrders)
+        console.log(orders)
+        reload()
+    }
+
+    
+
+
     return (
         <PaneContainer>
             {isLoading &&
@@ -225,6 +285,14 @@ const Pane = () => {
                             </FullButton>
                     </ButtonContainer>
                 </DetailsContainer>}
+                <ButtonContainer>        
+                    <FullButton onClick={() => sortTab('type')}>
+                        Sortuj: typ
+                    </FullButton>       
+                    <FullButton onClick={() => sortTab('date')}>
+                        Sortuj: data
+                    </FullButton>
+            </ButtonContainer>   
             <TableContainer>
                 <StyledTable>
                     <StyledCaption>Zamówienia oczekujące na realizację</StyledCaption>
@@ -232,6 +300,7 @@ const Pane = () => {
                         <StyledTr>
                             <StyledTh>Imię</StyledTh>
                             <StyledTh>Nazwisko</StyledTh>
+                            <StyledTh>Typ</StyledTh>
                             <StyledTh>Przyłbice</StyledTh>
                             <StyledTh>Ramki do przyłbic</StyledTh>
                             <StyledTh>formatki PET</StyledTh>
