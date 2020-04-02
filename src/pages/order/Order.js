@@ -31,7 +31,8 @@ const Order = props => {
             unitAdress: values.unitAdress,
             contactName: values.contactName,
             contactSurname: values.contactSurname,
-            contactPhone: values.contactPhone
+            contactPhone: values.contactPhone,
+            maskType: values.maskType
         }
 
         console.log(orderData);

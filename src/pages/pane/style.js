@@ -118,8 +118,9 @@ export const DetailsTitle = styled.div`
 
 export const LoadingWrapper = styled.div`
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
     background-color: rgba(255,255,255,.8);
     display: flex;
     align-items: center;

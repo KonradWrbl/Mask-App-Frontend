@@ -16,7 +16,7 @@ const Nav = ({ authenticated }) => {
     <NavWrapper>
         <Link to='/'>
             <NavLogo>
-                LoremIpsum
+                DrukujemyDlaMedyków
             </NavLogo>
         </Link>
         <NavButtons>

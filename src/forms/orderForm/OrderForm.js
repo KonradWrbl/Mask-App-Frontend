@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { StyledForm, ButtonContainer, StyledSpan } from './style';
 import { FullButton } from '../../components/FullButton';
 import RenderField from '../renderField/RenderField';
+import Dropdown from '../dropdown/Dropdown'
+
 
 
 const validate = values => {
@@ -49,6 +51,8 @@ const validate = values => {
     return errors;
 }
 
+const types = [ "Przyłbice miękkie", "Przyłbice twarde" ]
+
 
 
 let OrderForm = props => {
@@ -59,6 +63,7 @@ let OrderForm = props => {
             <Field name='surname' type='text' component={RenderField} label='Nazwisko' />
             <Field name='phone' type='text' component={RenderField} label='Numer telefonu' />
             <StyledSpan>Zapotrzebowanie na</StyledSpan>
+            <Field name='maskType' valueField="value" textField="color" data={types} component={Dropdown} label='Typ przyłbicy' />
             <Field name='visors' type='number' component={RenderField} label='Przyłbice' />
             <Field name='frames' type='number' component={RenderField} label='Wydrukowane ramki do przyłbic' />
             <Field name='forms' type='number' component={RenderField} label='Wycięte formatki z PET (0,5mm)' />

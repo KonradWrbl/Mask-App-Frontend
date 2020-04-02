@@ -17,7 +17,7 @@ const Main = ({ authenticated }) => {
     return (
         <MainContainer>
             <Title>
-                <H1>Lorem ipsum dolor sit amet</H1>
+                <H1>Drukujemy dla medyków</H1>
                 { authenticated ?
                 <ButtonContainer>
                     <Link to='/pane'>

@@ -31,8 +31,12 @@ const Pane = () => {
             .then((res) => {
                 setOrders(res.data)
                 console.log(res.data);
+                setLoading(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setLoading(false)
+            })
         }
 
         const getUserData = () => {
@@ -40,8 +44,12 @@ const Pane = () => {
             .then((res) => {
                 setOrders(res.data)
                 console.log(res.data);
+                setLoading(false)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                setLoading(false)
+            })
         }
 
         Axios.get('/type', config)
@@ -53,7 +61,7 @@ const Pane = () => {
                     setLoading(false)
                 } else {
                     getUserData()
-                    setLoading(false)
+                    
                 }
             })
     }
@@ -145,6 +153,10 @@ const Pane = () => {
             <StyledTr>
                 <StyledTd>Numer telefonu</StyledTd>
                 <StyledTd>{details.phone}</StyledTd>
+            </StyledTr>
+            <StyledTr>
+                <StyledTd>typ</StyledTd>
+                <StyledTd>{details.maskType}</StyledTd>
             </StyledTr>
             <StyledTr>
                 <StyledTd>Ilość przyłbic</StyledTd>
