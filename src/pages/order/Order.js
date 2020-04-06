@@ -22,15 +22,15 @@ const Order = props => {
             name: values.name,
             surname: values.surname,
             phone: values.phone,
-            visors: values.visors,
-            PETFilament: values.PETFilament,
-            PETFoil: values.PETFoil,
+            visorsHard: values.visorsHard ? values.visorsHard : 0,
+            visorsSoft: values.visorsSoft ? values.visorsSoft : 0,
+            PETFilament: values.PETFilament ? values.visorsSoft : 0,
+            PETFoil: values.PETFoil ? values.visorsSoft : 0,
             unit: values.unitName,
             unitAdress: values.unitAdress,
             contactName: values.contactName,
             contactSurname: values.contactSurname,
             contactPhone: values.contactPhone,
-            maskType: values.maskType
         }
 
         console.log(orderData);

@@ -17,5 +17,14 @@ export const ButtonContainer = styled.div`
 export const StyledSpan = styled.span`
     font-weight: bold;
     font-size: 1.1em;
-    border-bottom: solid 1px black
+    border-bottom: solid 1px black;
+`
+
+export const TypeContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    & :first-child {
+        margin-right: 10px;
+    }
 `

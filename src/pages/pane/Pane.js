@@ -113,23 +113,16 @@ const Pane = () => {
         const done = el.done;
         console.log('działam')
         if (done) return(
-            <>
-                <StyledTr key={`${id}0`} onClick={(e) => toggleDetails(e, id)}>
-                    <StyledTd rowSpan="2">{el.unit}</StyledTd>
-                    <StyledTd>HD-Lite</StyledTd>
-                    <StyledTd>{el.visors}</StyledTd>
-                    <StyledTd>{el.PETFilament}</StyledTd>
-                    <StyledTd>{el.PETFoil}</StyledTd>
-                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
-                </StyledTr>
-                <StyledTr key={`${id}1`} onClick={(e) => toggleDetails(e, id)}>
-                    <StyledTd>Druk 3D</StyledTd>
-                    <StyledTd>{el.visors}</StyledTd>
-                    <StyledTd>{el.PETFilament}</StyledTd>
-                    <StyledTd>{el.PETFoil}</StyledTd>
-                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
-                </StyledTr>
-            </>
+
+            <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
+                <StyledTd>{el.unit}</StyledTd>
+                <StyledTd>HD-Lite</StyledTd>
+                <StyledTd>{el.visorsSoft}</StyledTd>
+                <StyledTd>{el.PETFilament}</StyledTd>
+                <StyledTd>{el.PETFoil}</StyledTd>
+                <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
+            </StyledTr>
+
         )
         return []
     }
@@ -141,23 +134,14 @@ const Pane = () => {
         const id = el.orderId;
         const done = el.done;
         if (!done) return(
-            <>
-                <StyledTr key={`${id}0`} onClick={(e) => toggleDetails(e, id)}>
-                    <StyledTd rowSpan="2">{el.unit}</StyledTd>
-                    <StyledTd>HD-LITE</StyledTd>
-                    <StyledTd>{el.visors}</StyledTd>
-                    <StyledTd>{el.PETFilament}</StyledTd>
-                    <StyledTd>{el.PETFoil}</StyledTd>
-                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
-                </StyledTr>
-                <StyledTr key={`${id}1`} onClick={(e) => toggleDetails(e, id)}>
-                    <StyledTd>Druk 3D</StyledTd>
-                    <StyledTd>{el.visors}</StyledTd>
-                    <StyledTd>{el.PETFilament}</StyledTd>
-                    <StyledTd>{el.PETFoil}</StyledTd>
-                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
-                </StyledTr>
-            </>
+            <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
+                <StyledTd>{el.unit}</StyledTd>
+                <StyledTd>HD-LITE</StyledTd>
+                <StyledTd>{el.visorsSoft}</StyledTd>
+                <StyledTd>{el.PETFilament}</StyledTd>
+                <StyledTd>{el.PETFoil}</StyledTd>
+                <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
+            </StyledTr>
         )
         return []
         }
@@ -186,7 +170,11 @@ const Pane = () => {
                 <StyledTdMod>{details.maskType}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTdMod>Ilość przyłbic</StyledTdMod>
+                <StyledTdMod>Ilość przyłbic HD-LITE</StyledTdMod>
+                <StyledTdMod>{details.visors}</StyledTdMod>
+            </StyledTr>
+            <StyledTr>
+                <StyledTdMod>Ilość przyłbic Druk 3D</StyledTdMod>
                 <StyledTdMod>{details.visors}</StyledTdMod>
             </StyledTr>
             <StyledTr>
@@ -219,8 +207,8 @@ const Pane = () => {
 
 
     const compareType = (a, b) => {
-        const typeA = a.maskType.toUpperCase()
-        const typeB = b.maskType.toUpperCase()
+        const typeA = a.visorsHard.toUpperCase()
+        const typeB = b.visorsHard.toUpperCase()
 
         let comp = 0;
         if (typeA > typeB) comp = 1;
@@ -305,8 +293,8 @@ const Pane = () => {
                     <StyledThead>
                         <StyledTr>
                             <StyledTh>Nazwa jednostki</StyledTh>
-                            <StyledTh>Typ</StyledTh>
-                            <StyledTh>Przyłbice</StyledTh>
+                            <StyledTh>Przyłbice Druk 3D</StyledTh>
+                            <StyledTh>Przyłbice HD-LITE</StyledTh>
                             <StyledTh>Filament PET</StyledTh>
                             <StyledTh>Folie PET</StyledTh>
                             <StyledTh>Data</StyledTh>
@@ -323,8 +311,8 @@ const Pane = () => {
                     <StyledThead>
                         <StyledTr>
                             <StyledTh>Nazwa jednostki</StyledTh>
-                            <StyledTh>Typ</StyledTh>
-                            <StyledTh>Przyłbice</StyledTh>
+                            <StyledTh>Przyłbice Druk 3D</StyledTh>
+                            <StyledTh>Przyłbice HD-LITE</StyledTh>
                             <StyledTh>Filament PET</StyledTh>
                             <StyledTh>Folie PET</StyledTh>
                             <StyledTh>Data</StyledTh>
