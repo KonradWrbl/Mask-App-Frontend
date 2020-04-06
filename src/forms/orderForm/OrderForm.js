@@ -12,12 +12,6 @@ const validate = values => {
     if (!values.visors) {
         errors.visors = 'Uzupełnij wymagane pole!';
     }
-    if (!values.frames) {
-        errors.frames = 'Uzupełnij wymagane pole!';
-    }
-    if (!values.forms) {
-        errors.forms = 'Uzupełnij wymagane pole!';
-    }
     if (!values.PETFilament) {
         errors.PETFilament = 'Uzupełnij wymagane pole!';
     }
@@ -65,8 +59,6 @@ let OrderForm = props => {
             <StyledSpan>Zapotrzebowanie na</StyledSpan>
             <Field name='maskType' valueField="value" textField="color" data={types} component={Dropdown} label='Typ przyłbicy' />
             <Field name='visors' type='number' component={RenderField} label='Przyłbice' />
-            <Field name='frames' type='number' component={RenderField} label='Wydrukowane ramki do przyłbic' />
-            <Field name='forms' type='number' component={RenderField} label='Wycięte formatki z PET (0,5mm)' />
             <Field name='PETFilament' type='number' component={RenderField} label='Filament PET (w kg)' />
             <Field name='PETFoil' type='number' component={RenderField} label='Folie PET (w m2)' />
             <StyledSpan>Jednostka zgłaszająca</StyledSpan>

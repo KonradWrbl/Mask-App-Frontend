@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FullButton } from '../../components/FullButton'
 import { Link } from 'react-router-dom';
-import { ButtonContainer2, PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader } from './style';
+import { NavSpacing, ButtonContainer2, PaneContainer, StyledTable, StyledCaption, StyledThead, StyledTr, StyledTh, StyledTd, StyledTbody, TableContainer, DetailsContainer, DetailsWrapper, DetailsTitle, LoadingWrapper, Loader, StyledTdMod } from './style';
 import Axios from 'axios';
 import { ButtonContainer } from '../../forms/orderForm/style'
 
@@ -65,7 +65,7 @@ const Pane = () => {
                     setLoading(false)
                 } else {
                     getUserData()
-                    
+
                 }
             })
     }
@@ -105,25 +105,31 @@ const Pane = () => {
                 onLoad();
             })
     }
-    
-    
+
+
 
     const doneOrdersList = orders.map((el, key) =>{
         const id = el.orderId;
         const done = el.done;
         console.log('działam')
         if (done) return(
-            <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
-                <StyledTd>{el.name}</StyledTd>
-                <StyledTd>{el.surname}</StyledTd>
-                <StyledTd>{el.maskType}</StyledTd>
-                <StyledTd>{el.visors}</StyledTd>
-                <StyledTd>{el.frames}</StyledTd>
-                <StyledTd>{el.forms}</StyledTd>
-                <StyledTd>{el.PETFilament}</StyledTd>
-                <StyledTd>{el.PETFoil}</StyledTd>
-                <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
-            </StyledTr>
+            <>
+                <StyledTr key={`${id}0`} onClick={(e) => toggleDetails(e, id)}>
+                    <StyledTd rowSpan="2">{el.unit}</StyledTd>
+                    <StyledTd>HD-Lite</StyledTd>
+                    <StyledTd>{el.visors}</StyledTd>
+                    <StyledTd>{el.PETFilament}</StyledTd>
+                    <StyledTd>{el.PETFoil}</StyledTd>
+                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
+                </StyledTr>
+                <StyledTr key={`${id}1`} onClick={(e) => toggleDetails(e, id)}>
+                    <StyledTd>Druk 3D</StyledTd>
+                    <StyledTd>{el.visors}</StyledTd>
+                    <StyledTd>{el.PETFilament}</StyledTd>
+                    <StyledTd>{el.PETFoil}</StyledTd>
+                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
+                </StyledTr>
+            </>
         )
         return []
     }
@@ -135,17 +141,23 @@ const Pane = () => {
         const id = el.orderId;
         const done = el.done;
         if (!done) return(
-            <StyledTr key={id} onClick={(e) => toggleDetails(e, id)}>
-                <StyledTd>{el.name}</StyledTd>
-                <StyledTd>{el.surname}</StyledTd>
-                <StyledTd>{el.maskType}</StyledTd>
-                <StyledTd>{el.visors}</StyledTd>
-                <StyledTd>{el.frames}</StyledTd>
-                <StyledTd>{el.forms}</StyledTd>
-                <StyledTd>{el.PETFilament}</StyledTd>
-                <StyledTd>{el.PETFoil}</StyledTd>
-                <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
-            </StyledTr>
+            <>
+                <StyledTr key={`${id}0`} onClick={(e) => toggleDetails(e, id)}>
+                    <StyledTd rowSpan="2">{el.unit}</StyledTd>
+                    <StyledTd>HD-LITE</StyledTd>
+                    <StyledTd>{el.visors}</StyledTd>
+                    <StyledTd>{el.PETFilament}</StyledTd>
+                    <StyledTd>{el.PETFoil}</StyledTd>
+                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
+                </StyledTr>
+                <StyledTr key={`${id}1`} onClick={(e) => toggleDetails(e, id)}>
+                    <StyledTd>Druk 3D</StyledTd>
+                    <StyledTd>{el.visors}</StyledTd>
+                    <StyledTd>{el.PETFilament}</StyledTd>
+                    <StyledTd>{el.PETFoil}</StyledTd>
+                    <StyledTd>{el.createdAt.replace('T', ' ').replace('Z', '')}</StyledTd>
+                </StyledTr>
+            </>
         )
         return []
         }
@@ -154,60 +166,52 @@ const Pane = () => {
     const ordersDetailsList = (
         <>
             <StyledTr>
-                <StyledTd>Identyfikator zamówienia</StyledTd>
-                <StyledTd>{details.orderId}</StyledTd>
+                <StyledTdMod>Identyfikator zamówienia</StyledTdMod>
+                <StyledTdMod>{details.orderId}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Data złożenia zamówienia</StyledTd>
-                <StyledTd>{details.createdAt}</StyledTd>
+                <StyledTdMod>Data złożenia zamówienia</StyledTdMod>
+                <StyledTdMod>{details.createdAt}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Imię i Nazwisko</StyledTd>
-                <StyledTd>{`${details.name} ${details.surname}`}</StyledTd>
+                <StyledTdMod>Imię i Nazwisko</StyledTdMod>
+                <StyledTdMod>{`${details.name} ${details.surname}`}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Numer telefonu</StyledTd>
-                <StyledTd>{details.phone}</StyledTd>
+                <StyledTdMod>Numer telefonu</StyledTdMod>
+                <StyledTdMod>{details.phone}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>typ</StyledTd>
-                <StyledTd>{details.maskType}</StyledTd>
+                <StyledTdMod>typ</StyledTdMod>
+                <StyledTdMod>{details.maskType}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Ilość przyłbic</StyledTd>
-                <StyledTd>{details.visors}</StyledTd>
+                <StyledTdMod>Ilość przyłbic</StyledTdMod>
+                <StyledTdMod>{details.visors}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Ilość wydrukowanych ramek do przyłbic</StyledTd>
-                <StyledTd>{details.frames}</StyledTd>
+                <StyledTdMod>Filament PET (w kg)</StyledTdMod>
+                <StyledTdMod>{details.PETFilament}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Ilość wyciętych formatek PET</StyledTd>
-                <StyledTd>{details.forms}</StyledTd>
+                <StyledTdMod>Folie PET (w m2)</StyledTdMod>
+                <StyledTdMod>{details.PETFoil}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Filament PET (w kg)</StyledTd>
-                <StyledTd>{details.PETFilament}</StyledTd>
+                <StyledTdMod>Nazwa jadnostki</StyledTdMod>
+                <StyledTdMod>{details.unit}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Folie PET (w m2)</StyledTd>
-                <StyledTd>{details.PETFoil}</StyledTd>
+                <StyledTdMod>Adres jednostki</StyledTdMod>
+                <StyledTdMod>{details.unitAdress}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Nazwa jadnostki</StyledTd>
-                <StyledTd>{details.unit}</StyledTd>
+                <StyledTdMod>Imię i nazwisko osoby odbierającej zamówienie</StyledTdMod>
+                <StyledTdMod>{`${details.contactName} ${details.contactSurname}`}</StyledTdMod>
             </StyledTr>
             <StyledTr>
-                <StyledTd>Adres jednostki</StyledTd>
-                <StyledTd>{details.unitAdress}</StyledTd>
-            </StyledTr>
-            <StyledTr>
-                <StyledTd>Imię i nazwisko osoby odbierającej zamówienie</StyledTd>
-                <StyledTd>{`${details.contactName} ${details.contactSurname}`}</StyledTd>
-            </StyledTr>
-            <StyledTr>
-                <StyledTd>Telefon do osoby odbierającej zamówienie</StyledTd>
-                <StyledTd>{details.contactPhone}</StyledTd>
+                <StyledTdMod>Telefon do osoby odbierającej zamówienie</StyledTdMod>
+                <StyledTdMod>{details.contactPhone}</StyledTdMod>
             </StyledTr>
 
         </>
@@ -251,17 +255,18 @@ const Pane = () => {
                 tempOrders.sort(compareDate)
                 break;
         }
-        
+
         setOrders(tempOrders)
         console.log(orders)
         reload()
     }
 
-    
+
 
 
     return (
         <PaneContainer>
+            <NavSpacing />
             {isLoading &&
                 <LoadingWrapper>
                     <Loader>
@@ -286,25 +291,22 @@ const Pane = () => {
                             </FullButton>
                     </ButtonContainer>
                 </DetailsContainer>}
-                <ButtonContainer2>        
-                    <FullButton onClick={() => sortTab('type')}>
-                        Sortuj: typ
-                    </FullButton>       
-                    <FullButton onClick={() => sortTab('date')}>
-                        Sortuj: data
-                    </FullButton>
-            </ButtonContainer2>   
+            <ButtonContainer2>
+                <FullButton onClick={() => sortTab('type')}>
+                    Sortuj: typ
+                </FullButton>
+                <FullButton onClick={() => sortTab('date')}>
+                    Sortuj: data
+                </FullButton>
+            </ButtonContainer2>
             <TableContainer>
                 <StyledTable>
                     <StyledCaption>Zamówienia oczekujące na realizację</StyledCaption>
                     <StyledThead>
                         <StyledTr>
-                            <StyledTh>Imię</StyledTh>
-                            <StyledTh>Nazwisko</StyledTh>
+                            <StyledTh>Nazwa jednostki</StyledTh>
                             <StyledTh>Typ</StyledTh>
                             <StyledTh>Przyłbice</StyledTh>
-                            <StyledTh>Ramki do przyłbic</StyledTh>
-                            <StyledTh>formatki PET</StyledTh>
                             <StyledTh>Filament PET</StyledTh>
                             <StyledTh>Folie PET</StyledTh>
                             <StyledTh>Data</StyledTh>
@@ -312,6 +314,24 @@ const Pane = () => {
                     </StyledThead>
                     <StyledTbody>
                         {undoneOrdersList}
+                    </StyledTbody>
+                </StyledTable>
+            </TableContainer>
+            <TableContainer>
+                <StyledTable>
+                    <StyledCaption>Zrealizowane zamówienia</StyledCaption>
+                    <StyledThead>
+                        <StyledTr>
+                            <StyledTh>Nazwa jednostki</StyledTh>
+                            <StyledTh>Typ</StyledTh>
+                            <StyledTh>Przyłbice</StyledTh>
+                            <StyledTh>Filament PET</StyledTh>
+                            <StyledTh>Folie PET</StyledTh>
+                            <StyledTh>Data</StyledTh>
+                        </StyledTr>
+                    </StyledThead>
+                    <StyledTbody>
+                        {doneOrdersList}
                     </StyledTbody>
                 </StyledTable>
             </TableContainer>
@@ -329,27 +349,6 @@ const Pane = () => {
                     </Link>
                 }
             </ButtonContainer2>
-            <TableContainer>
-                <StyledTable>
-                    <StyledCaption>Zrealizowane zamówienia</StyledCaption>
-                    <StyledThead>
-                        <StyledTr>
-                            <StyledTh>Imię</StyledTh>
-                            <StyledTh>Nazwisko</StyledTh>
-                            <StyledTh>Typ</StyledTh>
-                            <StyledTh>Przyłbice</StyledTh>
-                            <StyledTh>Ramki do przyłbic</StyledTh>
-                            <StyledTh>formatki PET</StyledTh>
-                            <StyledTh>Filament PET</StyledTh>
-                            <StyledTh>Folie PET</StyledTh>
-                            <StyledTh>Data</StyledTh>
-                        </StyledTr>
-                    </StyledThead>
-                    <StyledTbody>
-                        {doneOrdersList}
-                    </StyledTbody>
-                </StyledTable>
-            </TableContainer>
 
         </PaneContainer>
     )

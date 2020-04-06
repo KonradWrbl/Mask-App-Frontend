@@ -23,8 +23,6 @@ const Order = props => {
             surname: values.surname,
             phone: values.phone,
             visors: values.visors,
-            frames: values.frames,
-            forms: values.forms,
             PETFilament: values.PETFilament,
             PETFoil: values.PETFoil,
             unit: values.unitName,

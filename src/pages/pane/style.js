@@ -11,8 +11,7 @@ export const PaneContainer = styled.div`
     padding: 10px;
 
     @media (max-width: 768px) {
-        height: 100vh;
-        padding: 60px 10px;
+        min-height: 100vh;
     }
 
 `
@@ -24,6 +23,7 @@ export const TableContainer = styled.div`
     box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
     padding: 10px;
     width: 100%;
+    margin-bottom: 10px;
 `
 
 export const ButtonContainer2 = styled.div`
@@ -49,11 +49,16 @@ export const StyledCaption = styled.caption`
     font-size: 2em;
     font-weight: semi-bold;
     margin-bottom: 10px;
+
+    @media (max-width: 768px) {
+        font-size: 1.3em
+    }
 `
 
 export const StyledThead = styled.thead`
     background-color: #00BFA6;
     color: white;
+
 
 `
 
@@ -66,46 +71,62 @@ export const StyledTr = styled.tr`
     :nth-child(even) {
         background-color: #f2f2f2;
     }
-
-
+    border: solid 1px #f2f2f2;
+    @media (max-width: 768px) {
+        font-size: 1em
+    }
 `
 
 export const StyledTh = styled.th`
     padding: 10px;
     min-width: 60px;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+            font-size: .8em
+        }
 
 `
 
 export const StyledTd = styled.td`
     padding: 10px;
     min-width: 60px;
+    white-space: nowrap;
+    @media (max-width: 768px) {
+        font-size: .8em
+    }
+
+`
+
+export const StyledTdMod = styled.td`
+    padding: 10px;
+    min-width: 60px;
+    @media (max-width: 768px) {
+        font-size: .8em
+    }
 
 `
 
 export const DetailsContainer = styled.div`
     width: 100vw;
-    height: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background-color: rgba(206,206,206,.6);
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 120px 0 10px 0;
 `
 
 export const DetailsWrapper = styled.div`
     padding: 10px;
     width: 500px;
-    height: auto;
     border-radius: 10px;
     overflow: auto;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
     padding: 10px;
-    margin: 60px 0 10px 0;
+
 
     @media (max-width: 768px) {
         width: 100vw;
@@ -163,4 +184,9 @@ export const Loader = styled.div`
             opacity: 0;
     }
 }
+`
+
+export const NavSpacing = styled.span`
+    height: 60px;
+    width: 100%;
 `

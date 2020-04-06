@@ -13,12 +13,13 @@ import Pane from './pages/pane/Pane';
 
 Axios.defaults.baseURL = 'https://europe-west2-maskorder-adadd.cloudfunctions.net/api'
 
+console.log(window.location);
 const token = localStorage.FBIdToken;
 let authenticated;
 if(token) {
   const decodedToken = jwtDecode(token);
-  if(decodedToken.exp * 1000 < Date.now()) {
-    //window.location.href = '/login'
+  if(decodedToken.exp * 1000 < Date.now() && window.location.pathname !== '/login') {
+    window.location.href = '/login'
     authenticated = false;
   } else authenticated = true;
 }
